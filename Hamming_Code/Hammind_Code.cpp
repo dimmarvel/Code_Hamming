@@ -3,11 +3,18 @@
 #include<map>
 enum PLUS_SIZE;
 PLUS_SIZE get_next_ps(PLUS_SIZE p_s);
-void cout_arr(int *bit_array, int size) {
-	for (int i = 1; i < size + 1; i++)
-	{
-		std::cout << " " << bit_array[i];
-	}
+void cout_arr(int *bit_array, int size, bool zero_one = true) {
+	//true - zero
+	//false - one
+	if (zero_one)
+		for (int i = 1; i < size + 1; i++)
+			std::cout << bit_array[i] << "  ";
+	else
+		for (int i = 0; i < size + 1; i++)
+			if (i == 0)
+				std::cout << bit_array[i] << " : ";
+			else
+				std::cout << bit_array[i] << " ";
 	std::cout << std::endl;
 }
 void init_arr(int *bit_array, int size) {
@@ -21,11 +28,12 @@ enum PLUS_SIZE
 	FOUR = 8, FIVE = 16, SIX = 32,
 	SEVEN = 64, EIGHT = 128, NINE = 256,
 };
+enum ex { X = 777 }EX;
 int* create_bit_array(int **arr_bit, int size_h, int size_a, int size_numbers, int *arr_numbers, PLUS_SIZE p_s) {
 	PLUS_SIZE fnc_p_c = { ONE };
 	int size_char_bit_arr = size_h + size_a;
-	int *char_bit_arr = new int[size_char_bit_arr];
-	int *bit_and_contrbit_arr = new int[size_char_bit_arr];
+	int *char_bit_arr = new int[size_numbers + 1];
+	int *bit_and_contrbit_arr = new int[size_numbers + 1];
 	std::cout << "ha:\n" << "h - ";
 	for (int i = 0; i < size_h; i++)
 	{
@@ -55,7 +63,7 @@ int* create_bit_array(int **arr_bit, int size_h, int size_a, int size_numbers, i
 		}
 		else {
 			bit_and_contrbit_arr[i] = char_bit_arr[j++];
-			if(i >= fnc_p_c)
+			if (i >= fnc_p_c)
 				fnc_p_c = get_next_ps(fnc_p_c);
 		}
 	}
@@ -64,6 +72,8 @@ int* create_bit_array(int **arr_bit, int size_h, int size_a, int size_numbers, i
 	{
 		std::cout << bit_and_contrbit_arr[i];
 	}
+
+	delete[]char_bit_arr;
 	return bit_and_contrbit_arr;
 }
 PLUS_SIZE get_next_ps(PLUS_SIZE p_s) {
@@ -76,9 +86,33 @@ PLUS_SIZE calc_size(PLUS_SIZE p_s, int index, int i = 0) {
 	}
 	return p_s;
 }
-bool X_counter(int* arr_bit,PLUS_SIZE p_s,int size_bit_arr) {
+void X_counter(int* arr_bit, int *x_array, PLUS_SIZE &p_s, int size_bit_arr) {
 	//true - чет
 	//false - не чет
+	PLUS_SIZE pp_s = p_s;
+	p_s = get_next_ps(p_s);
+	EX = X;
+	init_arr(x_array, size_bit_arr);
+	int x_counter = 0;
+		for (int i = pp_s; i <= size_bit_arr; i += (pp_s * 2)) {
+			int counter = 0;
+			int index = i;
+			while (counter < pp_s) {
+				if (arr_bit[index] == 1) {
+					x_counter++;
+				}
+				x_array[index] = EX;
+				index++;
+				counter++;
+			}
+		}
+	if ((x_counter % 2) == 0) {
+		x_array[0] = 0;
+	}
+	else {
+		x_array[0] = 1;
+	}
+	cout_arr(x_array, size_bit_arr, false);
 
 }
 int main() {
@@ -88,12 +122,9 @@ int main() {
 	int size_bit_sum = (sizeof(h) / sizeof(int)) + (sizeof(a) / sizeof(int));
 	int size_bit_h = sizeof(h) / sizeof(int);
 	int size_bit_a = sizeof(a) / sizeof(int);
-	int *word[2];
-	word[0] = new int[size_bit_h];
-	word[1] = new int[size_bit_a];
+	int **word = new int*[2];
 	word[0] = h;
 	word[1] = a;
-
 	int two_pow_bit_array[9] =
 	{
 		1, 2, 4,
@@ -164,10 +195,29 @@ int main() {
 	int *bit_and_contr_bit = new int[index];
 	bit_and_contr_bit = create_bit_array(word, size_bit_h, size_bit_a, index, BitContr_arr, plus_size);
 
-	bool chetnost = X_counter(bit_and_contr_bit, plus_size,index);
+	PLUS_SIZE X_p_s = { ONE };
+	int chet_size = index + 1;
+	std::cout << std::endl;
+	int *chetnost1 = new int[chet_size];
+	X_counter(bit_and_contr_bit, chetnost1, X_p_s, index);
 
+	int *chetnost2 = new int[chet_size];
+	X_counter(bit_and_contr_bit, chetnost2, X_p_s, index);
 
+	int *chetnost4 = new int[chet_size];
+	X_counter(bit_and_contr_bit, chetnost4, X_p_s, index);
 
+	int *chetnost8 = new int[chet_size];
+	X_counter(bit_and_contr_bit, chetnost8, X_p_s, index);
+
+	int *chetnost16 = new int[chet_size];
+	X_counter(bit_and_contr_bit, chetnost16, X_p_s, index);
+
+	delete[]chetnost1;
+	delete[]chetnost2;
+	delete[]chetnost4;
+	delete[]chetnost8;
+	delete[]chetnost16;
 
 	system("pause");
 	return 0;
