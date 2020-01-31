@@ -95,18 +95,18 @@ void X_counter(int* arr_bit, int *x_array, PLUS_SIZE &p_s, int size_bit_arr) {
 	EX = X;
 	init_arr(x_array, size_bit_arr);
 	int x_counter = 0;
-		for (int i = pp_s; i <= size_bit_arr; i += (pp_s * 2)) {
-			int counter = 0;
-			int index = i;
-			while (counter < pp_s && index <= size_bit_arr) {
-				if (arr_bit[index] == 1) {
-					x_counter++;
-				}
-				x_array[index] = EX;
-				index++;
-				counter++;
+	for (int i = pp_s; i <= size_bit_arr; i += (pp_s * 2)) {
+		int counter = 0;
+		int index = i;
+		while (counter < pp_s && index <= size_bit_arr) {
+			if (arr_bit[index] == 1) {
+				x_counter++;
 			}
+			x_array[index] = EX;
+			index++;
+			counter++;
 		}
+	}
 	if ((x_counter % 2) == 0) {
 		x_array[0] = 0;
 	}
@@ -117,6 +117,7 @@ void X_counter(int* arr_bit, int *x_array, PLUS_SIZE &p_s, int size_bit_arr) {
 
 }
 int main() {
+
 	setlocale(LC_ALL, "rus");
 	int h[8] = { 1,1,1,0,0,0,1,0 };
 	int a[8] = { 1,0,0,1,1,0,0,1 };
@@ -223,27 +224,27 @@ int main() {
 	if (user_even[0] == chetnost1[0])
 		std::cout << user_even[0] << " - true;" << std::endl;
 	else
-		std::cout << user_even[0] << " - false, need(" <<chetnost1[0] << ')' << std::endl;
-	
+		std::cout << user_even[0] << " - false, need(" << chetnost1[0] << ')' << std::endl;
+
 	if (user_even[1] == chetnost2[0])
 		std::cout << user_even[1] << " - true;" << std::endl;
 	else
-		std::cout << user_even[1] << " - false, need(" <<chetnost2[0] << ')' << std::endl;
-		
+		std::cout << user_even[1] << " - false, need(" << chetnost2[0] << ')' << std::endl;
+
 	if (user_even[2] == chetnost4[0])
 		std::cout << user_even[2] << " - true;" << std::endl;
 	else
-		std::cout << user_even[2] << " - false, need(" <<chetnost4[0] << ')' << std::endl;
-		
+		std::cout << user_even[2] << " - false, need(" << chetnost4[0] << ')' << std::endl;
+
 	if (user_even[3] == chetnost8[0])
 		std::cout << user_even[3] << " - true;" << std::endl;
 	else
-		std::cout << user_even[3] << " - false, need(" <<chetnost8[0] << ')' << std::endl;
-			
+		std::cout << user_even[3] << " - false, need(" << chetnost8[0] << ')' << std::endl;
+
 	if (user_even[4] == chetnost16[0])
 		std::cout << user_even[4] << " - true;" << std::endl;
 	else
-		std::cout << user_even[4] << " - false, need(" <<chetnost16[0] << ')' << std::endl;
+		std::cout << user_even[4] << " - false, need(" << chetnost16[0] << ')' << std::endl;
 
 
 	delete[]chetnost1;
