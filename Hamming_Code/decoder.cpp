@@ -1,4 +1,4 @@
-#include "coder.h"
+#include "decoder.h"
 
 void decoder() {
 	cout << "decoder";
