@@ -1,7 +1,8 @@
 #include "coder.h"
 
 int main() {
-	string text("ha q");
+	string text("haasasfa");
 	coder(text);
+	decoder();
 	system("pause");
 }
